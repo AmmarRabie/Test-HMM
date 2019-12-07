@@ -3,9 +3,11 @@
 #include <boost/test/included/unit_test.hpp>
 
 #define HANDMADE_MATH_IMPLEMENTATION
+#define HANDMADE_MATH_CPP_MODE
 #include "HMM.h"
 
 #include "register_tests.h"
+
 
 
 // if you use it, remove "#define BOOST_TEST_MODULE HMM" above

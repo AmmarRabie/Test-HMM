@@ -4,6 +4,15 @@ this file should cover the following functions in hmm.h
 - hmm_vec3 HMM_AddVec3(hmm_vec3 Left, hmm_vec3 Right)
 - hmm_vec4 HMM_AddVec4(hmm_vec4 Left, hmm_vec4 Right)
 - hmm_mat4 HMM_AddMat4(hmm_mat4 Left, hmm_mat4 Right)
+take care of operator overloading also for these functions:
+- hmm_vec2 operator+(hmm_vec2 Left, hmm_vec2 Right);
+- hmm_vec3 operator+(hmm_vec3 Left, hmm_vec3 Right);
+- hmm_vec4 operator+(hmm_vec4 Left, hmm_vec4 Right);
+- hmm_mat4 operator+(hmm_mat4 Left, hmm_mat4 Right);
+- hmm_vec2 &operator+=(hmm_vec2 &Left, hmm_vec2 Right);
+- hmm_vec3 &operator+=(hmm_vec3 &Left, hmm_vec3 Right);
+- hmm_vec4 &operator+=(hmm_vec4 &Left, hmm_vec4 Right);
+- hmm_mat4 &operator+=(hmm_mat4 &Left, hmm_mat4 Right);
 */
 #pragma once
 #include <boost\test\included\unit_test.hpp>
@@ -89,6 +98,24 @@ BOOST_AUTO_TEST_SUITE_END()
 
 #pragma region R_HMM_AddVec3
 BOOST_AUTO_TEST_SUITE(S_HMM_AddVec3)
+
+BOOST_AUTO_TEST_CASE(TC1_zeros)
+{
+	hmm_vec2 left = HMM_Vec2i(0, 0), right = HMM_Vec2i(0, 0);
+	auto res = HMM_AddVec2(left, right);
+	BOOST_TEST(res.X == 0);
+	BOOST_TEST(res.Y == 0);
+
+	left = HMM_Vec2i(0, 0);  right = HMM_Vec2i(-5, 546);
+	res = HMM_AddVec2(left, right);
+	BOOST_TEST(res.X == right.X);
+	BOOST_TEST(res.Y == right.Y);
+
+	left = HMM_Vec2i(274, -765);  right = HMM_Vec2i(0, 0);
+	res = HMM_AddVec2(left, right);
+	BOOST_TEST(res.X == left.X);
+	BOOST_TEST(res.Y == left.Y);
+}
 
 BOOST_AUTO_TEST_SUITE_END()
 #pragma endregion HMM_AddVec3
