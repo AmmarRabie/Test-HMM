@@ -4,23 +4,23 @@
 #include<iostream>
 using namespace std;
 
-#pragma region R_HMM_SubtractVec2
-BOOST_AUTO_TEST_SUITE(S_HMM_SubtractVec2)
+#pragma region R_HMM_SubtractVec2_op
+BOOST_AUTO_TEST_SUITE(S_HMM_SubtractVec2_op)
 
 BOOST_AUTO_TEST_CASE(TC1_zeros)
 {
 	hmm_vec2 left = HMM_Vec2i(0, 0), right = HMM_Vec2i(0, 0);
-	auto res = HMM_SubtractVec2(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == 0);
 	BOOST_TEST(res.Y == 0);
 
 	left = HMM_Vec2i(0, 0);  right = HMM_Vec2i(-5, 546);
-	res = HMM_SubtractVec2(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == -1 * right.X);
 	BOOST_TEST(res.Y == -1 * right.Y);
 
 	left = HMM_Vec2i(274, -765);  right = HMM_Vec2i(0, 0);
-	res = HMM_SubtractVec2(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == left.X);
 	BOOST_TEST(res.Y == left.Y);
 }
@@ -28,12 +28,12 @@ BOOST_AUTO_TEST_CASE(TC1_zeros)
 BOOST_AUTO_TEST_CASE(TC2_positives)
 {
 	hmm_vec2 left = HMM_Vec2i(52, 14), right = HMM_Vec2i(174, 156);
-	auto res = HMM_SubtractVec2(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == 52 - 174);
 	BOOST_TEST(res.Y == 14 - 156);
 
 	left = HMM_Vec2i(12, 21);  right = HMM_Vec2i(15, 72);
-	res = HMM_SubtractVec2(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == 12 - 15);
 	BOOST_TEST(res.Y == 21 - 72);
 }
@@ -41,12 +41,12 @@ BOOST_AUTO_TEST_CASE(TC2_positives)
 BOOST_AUTO_TEST_CASE(TC3_negatives)
 {
 	hmm_vec2 left = HMM_Vec2i(-789, -452), right = HMM_Vec2i(-451, -5146);
-	auto res = HMM_SubtractVec2(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == -1 * (789 - 451));
 	BOOST_TEST(res.Y == -1 * (452 - 5146));
 
 	left = HMM_Vec2i(-10, -11);  right = HMM_Vec2i(-11, -10);
-	res = HMM_SubtractVec2(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == -1 * (10 - 11));
 	BOOST_TEST(res.Y == -1 * (11 - 10));
 }
@@ -54,12 +54,12 @@ BOOST_AUTO_TEST_CASE(TC3_negatives)
 BOOST_AUTO_TEST_CASE(TC4_posNeg)
 {
 	hmm_vec2 left = HMM_Vec2i(-457, 155), right = HMM_Vec2i(235, -4654);
-	auto res = HMM_SubtractVec2(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == -457 - 235);
 	BOOST_TEST(res.Y == 155 + 4654);
 
 	left = HMM_Vec2i(548, -654);  right = HMM_Vec2i(-7317, 1254);
-	res = HMM_SubtractVec2(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == 548 + 7317);
 	BOOST_TEST(res.Y == -654 - 1254);
 }
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(TC4_posNeg)
 BOOST_AUTO_TEST_CASE(TC5_largeNumbers, TOLERANCE)
 {
 	hmm_vec2 left = HMM_Vec2i(INT_MAX, INT_MAX), right = HMM_Vec2i(INT_MAX, -1 * INT_MAX);
-	auto res = HMM_SubtractVec2(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == 0);
 	BOOST_TEST(res.Y == 2.0 * INT_MAX);
 }
@@ -77,25 +77,25 @@ BOOST_AUTO_TEST_SUITE_END()
 
 
 
-#pragma region R_HMM_SubtractVec3
-BOOST_AUTO_TEST_SUITE(S_HMM_SubtractVec3)
+#pragma region R_HMM_SubtractVec3_op
+BOOST_AUTO_TEST_SUITE(S_HMM_SubtractVec3_op)
 
 BOOST_AUTO_TEST_CASE(TC1_zeros)
 {
 	hmm_vec3 left = HMM_Vec3i(0, 0, 0), right = HMM_Vec3i(0, 0, 0);
-	auto res = HMM_SubtractVec3(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == 0);
 	BOOST_TEST(res.Y == 0);
 	BOOST_TEST(res.Z == 0);
 
 	left = HMM_Vec3i(0, 0, 0);  right = HMM_Vec3i(-5, 546, 6463);
-	res = HMM_SubtractVec3(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == -1 * right.X);
 	BOOST_TEST(res.Y == -1 * right.Y);
 	BOOST_TEST(res.Z == -1 * right.Z);
 
 	left = HMM_Vec3i(274, -765, -452369);  right = HMM_Vec3i(0, 0, 0);
-	res = HMM_SubtractVec3(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == left.X);
 	BOOST_TEST(res.Y == left.Y);
 	BOOST_TEST(res.Z == left.Z);
@@ -104,13 +104,13 @@ BOOST_AUTO_TEST_CASE(TC1_zeros)
 BOOST_AUTO_TEST_CASE(TC2_positives)
 {
 	hmm_vec3 left = HMM_Vec3i(52, 14, 1254), right = HMM_Vec3i(174, 156, 9452);
-	auto res = HMM_SubtractVec3(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == 52 - 174);
 	BOOST_TEST(res.Y == 14 - 156);
 	BOOST_TEST(res.Z == 1254 - 9452);
 
 	left = HMM_Vec3i(12, 21, 2);  right = HMM_Vec3i(15, 72, 1);
-	res = HMM_SubtractVec3(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == 12 - 15);
 	BOOST_TEST(res.Y == 21 - 72);
 	BOOST_TEST(res.Z == 2 - 1);
@@ -119,13 +119,13 @@ BOOST_AUTO_TEST_CASE(TC2_positives)
 BOOST_AUTO_TEST_CASE(TC3_negatives)
 {
 	hmm_vec3 left = HMM_Vec3i(-789, -452, -88875), right = HMM_Vec3i(-451, -5146, -3654);
-	auto res = HMM_SubtractVec3(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == -1 * (789 - 451));
 	BOOST_TEST(res.Y == -1 * (452 - 5146));
 	BOOST_TEST(res.Z == -1 * (88875 - 3654));
 
 	left = HMM_Vec3i(-10, -11, -5);  right = HMM_Vec3i(-11, -10, -5);
-	res = HMM_SubtractVec3(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == -1 * (10 - 11));
 	BOOST_TEST(res.Y == -1 * (11 - 10));
 	BOOST_TEST(res.Z == -1 * (5 - 5));
@@ -134,13 +134,13 @@ BOOST_AUTO_TEST_CASE(TC3_negatives)
 BOOST_AUTO_TEST_CASE(TC4_posNeg)
 {
 	hmm_vec3 left = HMM_Vec3i(-457, 155, 254), right = HMM_Vec3i(235, -4654, -147258);
-	auto res = HMM_SubtractVec3(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == -457 - 235);
 	BOOST_TEST(res.Y == 155 + 4654);
 	BOOST_TEST(res.Z == 254 + 147258);
 
 	left = HMM_Vec3i(548, -654, -6841);  right = HMM_Vec3i(-7317, 1254, 1486);
-	res = HMM_SubtractVec3(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == 548 + 7317);
 	BOOST_TEST(res.Y == -654 - 1254);
 	BOOST_TEST(res.Z == -6841 - 1486);
@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_CASE(TC4_posNeg)
 BOOST_AUTO_TEST_CASE(TC5_largeNumbers, TOLERANCE)
 {
 	hmm_vec3 left = HMM_Vec3i(INT_MAX, INT_MAX, -1 * INT_MAX), right = HMM_Vec3i(INT_MAX, -1 * INT_MAX, -1 * INT_MAX);
-	auto res = HMM_SubtractVec3(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == 0);
 	BOOST_TEST(res.Y == 2.0 * INT_MAX);
 	BOOST_TEST(res.Z == 0);
@@ -161,27 +161,27 @@ BOOST_AUTO_TEST_SUITE_END()
 
 
 
-#pragma region R_HMM_SubtractVec4
-BOOST_AUTO_TEST_SUITE(S_HMM_SubtractVec4)
+#pragma region R_HMM_SubtractVec4_op
+BOOST_AUTO_TEST_SUITE(S_HMM_SubtractVec4_op)
 
 BOOST_AUTO_TEST_CASE(TC1_zeros)
 {
 	hmm_vec4 left = HMM_Vec4i(0, 0, 0, 0), right = HMM_Vec4i(0, 0, 0, 0);
-	auto res = HMM_SubtractVec4(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == 0);
 	BOOST_TEST(res.Y == 0);
 	BOOST_TEST(res.Z == 0);
 	BOOST_TEST(res.W == 0);
 
 	left = HMM_Vec4i(0, 0, 0, 0);  right = HMM_Vec4i(-5, 546, 6463, -654323);
-	res = HMM_SubtractVec4(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == -1 * right.X);
 	BOOST_TEST(res.Y == -1 * right.Y);
 	BOOST_TEST(res.Z == -1 * right.Z);
 	BOOST_TEST(res.W == -1 * right.W);
 
 	left = HMM_Vec4i(274, -765, -452369, 5431);  right = HMM_Vec4i(0, 0, 0, 0);
-	res = HMM_SubtractVec4(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == left.X);
 	BOOST_TEST(res.Y == left.Y);
 	BOOST_TEST(res.Z == left.Z);
@@ -191,14 +191,14 @@ BOOST_AUTO_TEST_CASE(TC1_zeros)
 BOOST_AUTO_TEST_CASE(TC2_positives)
 {
 	hmm_vec4 left = HMM_Vec4i(52, 14, 1254, 70), right = HMM_Vec4i(174, 156, 9452, 90);
-	auto res = HMM_SubtractVec4(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == 52 - 174);
 	BOOST_TEST(res.Y == 14 - 156);
 	BOOST_TEST(res.Z == 1254 - 9452);
 	BOOST_TEST(res.W == 70 - 90);
 
 	left = HMM_Vec4i(12, 21, 2, 125);  right = HMM_Vec4i(15, 72, 1, 987);
-	res = HMM_SubtractVec4(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == 12 - 15);
 	BOOST_TEST(res.Y == 21 - 72);
 	BOOST_TEST(res.Z == 2 - 1);
@@ -208,14 +208,14 @@ BOOST_AUTO_TEST_CASE(TC2_positives)
 BOOST_AUTO_TEST_CASE(TC3_negatives)
 {
 	hmm_vec4 left = HMM_Vec4i(-789, -452, -88875, -164), right = HMM_Vec4i(-451, -5146, -3654, -461);
-	auto res = HMM_SubtractVec4(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == -1 * (789 - 451));
 	BOOST_TEST(res.Y == -1 * (452 - 5146));
 	BOOST_TEST(res.Z == -1 * (88875 - 3654));
 	BOOST_TEST(res.W == -1 * (164 - 461));
 
 	left = HMM_Vec4i(-10, -11, -5, -1);  right = HMM_Vec4i(-11, -10, -5, -2);
-	res = HMM_SubtractVec4(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == -1 * (10 - 11));
 	BOOST_TEST(res.Y == -1 * (11 - 10));
 	BOOST_TEST(res.Z == -1 * (5 - 5));
@@ -225,14 +225,14 @@ BOOST_AUTO_TEST_CASE(TC3_negatives)
 BOOST_AUTO_TEST_CASE(TC4_posNeg)
 {
 	hmm_vec4 left = HMM_Vec4i(-457, 155, 254, -379), right = HMM_Vec4i(235, -4654, -147258, 973);
-	auto res = HMM_SubtractVec4(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == -457 - 235);
 	BOOST_TEST(res.Y == 155 + 4654);
 	BOOST_TEST(res.Z == 254 + 147258);
 	BOOST_TEST(res.W == -379 - 973);
 
 	left = HMM_Vec4i(548, -654, -6841, 528);  right = HMM_Vec4i(-7317, 1254, 1486, -825);
-	res = HMM_SubtractVec4(left, right);
+	res = left - right;
 	BOOST_TEST(res.X == 548 + 7317);
 	BOOST_TEST(res.Y == -654 - 1254);
 	BOOST_TEST(res.Z == -6841 - 1486);
@@ -242,7 +242,7 @@ BOOST_AUTO_TEST_CASE(TC4_posNeg)
 BOOST_AUTO_TEST_CASE(TC5_largeNumbers, TOLERANCE)
 {
 	hmm_vec4 left = HMM_Vec4i(INT_MAX, INT_MAX, -1 * INT_MAX, -1 * INT_MAX), right = HMM_Vec4i(INT_MAX, -1 * INT_MAX, -1 * INT_MAX, INT_MAX);
-	auto res = HMM_SubtractVec4(left, right);
+	auto res = left - right;
 	BOOST_TEST(res.X == 0);
 	BOOST_TEST(res.Y == 2.0 * INT_MAX);
 	BOOST_TEST(res.Z == 0);
@@ -255,12 +255,12 @@ BOOST_AUTO_TEST_SUITE_END()
 
 
 
-#pragma region R_HMM_SubtractMat4
-BOOST_AUTO_TEST_SUITE(S_HMM_SubtractMat4)
+#pragma region R_HMM_SubtractMat4_op
+BOOST_AUTO_TEST_SUITE(S_HMM_SubtractMat4_op)
 BOOST_AUTO_TEST_CASE(TC1_zeros)
 {
 	hmm_mat4 left = HMM_Mat4(), right = HMM_Mat4();
-	auto res = HMM_SubtractMat4(left, right);
+	auto res = left - right;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			BOOST_TEST_INFO("i = " << i << "and j = " << j);
@@ -273,7 +273,7 @@ BOOST_AUTO_TEST_CASE(TC1_zeros)
 	right.Elements[1][0] = 98150;	right.Elements[1][1] = 65186;	right.Elements[1][2] = 69296;	right.Elements[1][3] = 34902;
 	right.Elements[2][0] = 77198;	right.Elements[2][1] = 53326;	right.Elements[2][2] = 46488;	right.Elements[2][3] = 86270;
 	right.Elements[3][0] = 54705;	right.Elements[3][1] = 69516;	right.Elements[3][2] = 28732;	right.Elements[3][3] = 41310;
-	res = HMM_SubtractMat4(left, right);
+	res = left - right;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			BOOST_TEST_INFO("i = " << i << " j = " << j);
@@ -286,7 +286,7 @@ BOOST_AUTO_TEST_CASE(TC1_zeros)
 	left.Elements[1][0] = 98150;	left.Elements[1][1] = 65186;	left.Elements[1][2] = 69296;	left.Elements[1][3] = 34902;
 	left.Elements[2][0] = 77198;	left.Elements[2][1] = 53326;	left.Elements[2][2] = 46488;	left.Elements[2][3] = 86270;
 	left.Elements[3][0] = 54705;	left.Elements[3][1] = 69516;	left.Elements[3][2] = 28732;	left.Elements[3][3] = 41310;
-	res = HMM_SubtractMat4(left, right);
+	res = left - right;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			BOOST_TEST_INFO("i = " << i << " j = " << j);
@@ -308,7 +308,7 @@ BOOST_AUTO_TEST_CASE(TC2_positives)
 	left.Elements[2][0] = 39968;	left.Elements[2][1] = 48773;	left.Elements[2][2] = 11260;	left.Elements[2][3] = 14758;
 
 	left.Elements[3][0] = 88404;	left.Elements[3][1] = 7239;	left.Elements[3][2] = 15992;	left.Elements[3][3] = 14221;
-	auto res = HMM_SubtractMat4(left, right);
+	auto res = left - right;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			BOOST_TEST_INFO("i = " << i << " j = " << j);
@@ -327,7 +327,7 @@ BOOST_AUTO_TEST_CASE(TC2_positives)
 	left.Elements[2][0] = 64833;	left.Elements[2][1] = 44326;	left.Elements[2][2] = 61627;	left.Elements[2][3] = 33390;
 	left.Elements[3][0] = 65428;	left.Elements[3][1] = 95957;	left.Elements[3][2] = 83924;	left.Elements[3][3] = 658;
 
-	res = HMM_SubtractMat4(left, right);
+	res = left - right;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			BOOST_TEST_INFO("i = " << i << " j = " << j);
@@ -349,7 +349,7 @@ BOOST_AUTO_TEST_CASE(TC3_negatives)
 	left.Elements[2][0] = -89972;	left.Elements[2][1] = -88742;	left.Elements[2][2] = -76691;	left.Elements[2][3] = -97167;
 	left.Elements[3][0] = -41668;	left.Elements[3][1] = -89867;	left.Elements[3][2] = -29079;	left.Elements[3][3] = -47677;
 
-	auto res = HMM_SubtractMat4(left, right);
+	auto res = left - right;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			BOOST_TEST_INFO("i = " << i << " j = " << j);
@@ -368,7 +368,7 @@ BOOST_AUTO_TEST_CASE(TC3_negatives)
 	left.Elements[2][0] = -92782;	left.Elements[2][1] = -87977;	left.Elements[2][2] = -64911;	left.Elements[2][3] = -21998;
 	left.Elements[3][0] = -62754;	left.Elements[3][1] = -97017;	left.Elements[3][2] = -35772;	left.Elements[3][3] = -55770;
 
-	res = HMM_SubtractMat4(left, right);
+	res = left - right;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			BOOST_TEST_INFO("i = " << i << " j = " << j);
@@ -390,7 +390,7 @@ BOOST_AUTO_TEST_CASE(TC4_posNeg)
 	left.Elements[2][0] = 301;	left.Elements[2][1] = -241;	left.Elements[2][2] = -440;	left.Elements[2][3] = 52;
 	left.Elements[3][0] = 990;	left.Elements[3][1] = 309;	left.Elements[3][2] = 86;	left.Elements[3][3] = 508;
 
-	auto res = HMM_SubtractMat4(left, right);
+	auto res = left - right;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			BOOST_TEST_INFO("i = " << i << " j = " << j);
@@ -409,7 +409,7 @@ BOOST_AUTO_TEST_CASE(TC4_posNeg)
 	left.Elements[2][0] = -874;	left.Elements[2][1] = 240;	left.Elements[2][2] = 10;	left.Elements[2][3] = -599;
 	left.Elements[3][0] = -329;	left.Elements[3][1] = -32;	left.Elements[3][2] = 398;	left.Elements[3][3] = -77;
 
-	res = HMM_SubtractMat4(left, right);
+	res = left - right;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			BOOST_TEST_INFO("i = " << i << " j = " << j);
@@ -431,7 +431,7 @@ BOOST_AUTO_TEST_CASE(TC5_largeNumbers, TOLERANCE)
 	left.Elements[2][0] = -INT_MAX;	left.Elements[2][1] = INT_MAX;	left.Elements[2][2] = INT_MAX;	left.Elements[2][3] = -INT_MAX;
 	left.Elements[3][0] = -INT_MAX;	left.Elements[3][1] = -INT_MAX;	left.Elements[3][2] = INT_MAX;	left.Elements[3][3] = -INT_MAX;
 
-	auto res = HMM_SubtractMat4(left, right);
+	auto res = left - right;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			BOOST_TEST_INFO("i = " << i << " j = " << j);
