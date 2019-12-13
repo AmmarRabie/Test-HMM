@@ -23,5 +23,10 @@ take care of operator overloading also for these functions:
 - hmm_vec4 &operator/=(hmm_vec4 &Left, float Right);
 - hmm_mat4 &operator/=(hmm_mat4 &Left, float Right);
 */
-#pragma once
-#include <boost\test\included\unit_test.hpp>
+#define BOOST_TEST_MAIN
+#include <boost/test/unit_test.hpp>
+#include "../HMM.h"
+namespace utf = boost::unit_test;
+
+BOOST_AUTO_TEST_SUITE(scoring_test_suite)
+BOOST_AUTO_TEST_SUITE_END()

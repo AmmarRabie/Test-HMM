@@ -6,29 +6,37 @@ add_library(
     HMM
     ${HMMsrc}/HMM.h
 )
-    
+
+set(TESThelpersSrc "./")
+add_library(
+    TestHelpers
+    ${TESThelpersSrc}/test_helpers.h
+)
+
 enable_testing()
-add_definitions(-DBOOST_TEST_DYN_LINK) 
+add_definitions(-DBOOST_TEST_DYN_LINK -DHANDMADE_MATH_IMPLEMENTATION -DHANDMADE_MATH_CPP_MODE) 
 set (BOOST_ROOT $ENV{boost_test})
 find_package (Boost REQUIRED COMPONENTS unit_test_framework)
-include_directories (${Boost_INCLUDE_DIRS} ${HMMsrc})
-
 set_target_properties(HMM PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(TestHelpers PROPERTIES LINKER_LANGUAGE CXX)
 
-set(TEST_SRCS "./tests/")
+include_directories (${Boost_INCLUDE_DIRS} ${HMMsrc} ${TEST_HELPERS_DIR})
 
-file(GLOB TEST_SRCS RELATIVE ${TEST_SRCS} *.cpp)
 
-foreach(testSrc ${TEST_SRCS})
-        #Extract the filename without an extension (NAME_WE)
-        get_filename_component(testName ${testSrc} NAME_WE)
+set(TESTS_SRCS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tests)
 
-        #Add compile target
-        add_executable(${testName} ${testSrc})
+file(GLOB TESTS_SRCS ${TESTS_SRCS_DIR}/*.cpp)
+foreach(testSrc ${TESTS_SRCS})
+    #Extract the filename without an extension (NAME_WE)
+    get_filename_component(testName ${testSrc} NAME_WE)
+    message(${testSrc})
 
-        #link to Boost libraries AND your targets and dependencies
-        target_link_libraries(${testName} ${Boost_LIBRARIES} HMM)
-        
-        add_test(${testName} hmm_test)
+    #Add compile target
+    add_executable(${testName} ${testSrc})
+
+    #link to Boost libraries AND your targets and dependencies
+    target_link_libraries(${testName} ${TestHelpers} ${Boost_LIBRARIES} HMM)
+    
+    add_test(hmm_test ${testName})
 endforeach(testSrc)
 
