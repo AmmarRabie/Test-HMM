@@ -6,6 +6,9 @@
 #define HANDMADE_MATH_CPP_MODE
 #include "HMM.h"
 
+namespace utf = boost::unit_test;
+namespace tt = boost::test_tools;
+#define TOLERANCE *boost::unit_test::tolerance(0.00001)
 #include "register_tests.h"
 
 
