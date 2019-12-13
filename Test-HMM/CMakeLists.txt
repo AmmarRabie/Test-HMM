@@ -29,7 +29,6 @@ file(GLOB TESTS_SRCS ${TESTS_SRCS_DIR}/*.cpp)
 foreach(testSrc ${TESTS_SRCS})
     #Extract the filename without an extension (NAME_WE)
     get_filename_component(testName ${testSrc} NAME_WE)
-    message(${testSrc})
 
     #Add compile target
     add_executable(${testName} ${testSrc})
@@ -37,6 +36,6 @@ foreach(testSrc ${TESTS_SRCS})
     #link to Boost libraries AND your targets and dependencies
     target_link_libraries(${testName} ${TestHelpers} ${Boost_LIBRARIES} HMM)
     
-    add_test(hmm_test ${testName})
+    add_test(hmm_${testName} ${testName})
 endforeach(testSrc)
 
