@@ -50,7 +50,8 @@ BOOST_AUTO_TEST_CASE(test_HMM_DivideVec2_int_V1_zeros, *utf::tolerance(0.00001))
     //Act
     auto res = HMM_DivideVec2(zeros, right);
     //Assert
-    BOOST_TEST(vector<float>(res.Elements, res.Elements + 2) == vector<float>({0, 0}));
+    float expectedRes[2] = {0, 0};
+    BOOST_TEST(res.Elements == expectedRes);
 }
 
 BOOST_AUTO_TEST_CASE(test_HMM_DivideVec2_int_postives, *utf::tolerance(0.00001)) {
@@ -60,7 +61,8 @@ BOOST_AUTO_TEST_CASE(test_HMM_DivideVec2_int_postives, *utf::tolerance(0.00001))
     //Act
     auto res = HMM_DivideVec2(left, right);
     //Assert
-    BOOST_TEST(vector<float>(res.Elements, res.Elements + 2) == vector<float>({left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1]}));
+    float expectedRes[2] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1]};
+    BOOST_TEST(res.Elements == expectedRes);
 }
 
 BOOST_AUTO_TEST_CASE(test_HMM_DivideVec2_int_pos_neg, *utf::tolerance(0.00001)) {
@@ -142,7 +144,8 @@ BOOST_AUTO_TEST_CASE(test_division_vec2_by_float_using_division_equal_operator, 
     auto res = left;
     res /= right;
     //Assert
-    BOOST_TEST(vector<float>(res.Elements, res.Elements + 2) == vector<float>({left.Elements[0] / right, left.Elements[1] / right}));
+    float expectedRes[2] = {left.Elements[0] / right, left.Elements[1] / right};
+    BOOST_TEST(res.Elements == expectedRes);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -164,17 +167,12 @@ BOOST_AUTO_TEST_CASE(test_HMM_DivideMat4f, *utf::tolerance(0.00001)) {
     hmm_mat4 res = HMM_DivideMat4f(left, right);
 
     //Assert
-    vector<vector<float>> expMat = {{arr[0][0] / right, arr[0][1] / right, arr[0][2] / right, arr[0][3] / right},
-                                    {arr[1][0] / right, arr[1][1] / right, arr[1][2] / right, arr[1][3] / right},
-                                    {arr[2][0] / right, arr[2][1] / right, arr[2][2] / right, arr[2][3] / right},
-                                    {arr[3][0] / right, arr[3][1] / right, arr[3][2] / right, arr[3][3] / right}};
+    float expMat[4][4] = {{arr[0][0] / right, arr[0][1] / right, arr[0][2] / right, arr[0][3] / right},
+                          {arr[1][0] / right, arr[1][1] / right, arr[1][2] / right, arr[1][3] / right},
+                          {arr[2][0] / right, arr[2][1] / right, arr[2][2] / right, arr[2][3] / right},
+                          {arr[3][0] / right, arr[3][1] / right, arr[3][2] / right, arr[3][3] / right}};
 
-    vector<vector<float>> resMat(4);
-    for (size_t i = 0; i < 4; i++) {
-        copy(res.Elements[i], res.Elements[i] + 4, std::back_inserter(resMat[i]));
-    }
-
-    BOOST_TEST(expMat == resMat);
+    BOOST_TEST(res.Elements == expMat);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -196,17 +194,12 @@ BOOST_AUTO_TEST_CASE(test_HMM_DivideMat4f, *utf::tolerance(0.00001)) {
     hmm_mat4 res = HMM_DivideMat4f(left, right);
 
     //Assert
-    vector<vector<float>> expMat = {{arr[0][0] / right, arr[0][1] / right, arr[0][2] / right, arr[0][3] / right},
-                                    {arr[1][0] / right, arr[1][1] / right, arr[1][2] / right, arr[1][3] / right},
-                                    {arr[2][0] / right, arr[2][1] / right, arr[2][2] / right, arr[2][3] / right},
-                                    {arr[3][0] / right, arr[3][1] / right, arr[3][2] / right, arr[3][3] / right}};
+    float expMat[4][4] = {{arr[0][0] / right, arr[0][1] / right, arr[0][2] / right, arr[0][3] / right},
+                          {arr[1][0] / right, arr[1][1] / right, arr[1][2] / right, arr[1][3] / right},
+                          {arr[2][0] / right, arr[2][1] / right, arr[2][2] / right, arr[2][3] / right},
+                          {arr[3][0] / right, arr[3][1] / right, arr[3][2] / right, arr[3][3] / right}};
 
-    vector<vector<float>> resMat(4);
-    for (size_t i = 0; i < 4; i++) {
-        copy(res.Elements[i], res.Elements[i] + 4, std::back_inserter(resMat[i]));
-    }
-
-    BOOST_TEST(expMat == resMat);
+    BOOST_TEST(res.Elements == expMat);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
