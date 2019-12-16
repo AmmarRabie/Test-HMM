@@ -244,6 +244,27 @@ BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(multiplication_using_operators)
 
+BOOST_AUTO_TEST_CASE(test_mul_mat4_by_mat4_using_mul_operator, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = hmm_mat4();
+    float arr[4][4] = {{1, 2, 3, 4},
+                       {5, -6, 7, 8},
+                       {9, 10, 11, 12},
+                       {0, 15, 0, 0}};
+    copy(&arr[0][0], &arr[0][0] + 4 * 4, &left.Elements[0][0]);
+
+    //Act
+    hmm_mat4 res = left * left;
+
+    //Assert
+    float expMat[4][4] = {{38, 80, 50, 56},
+                          {38, 236, 50, 56},
+                          {158, 248, 218, 248},
+                          {75, -90, 105, 120}};
+
+    BOOST_TEST(res.Elements == expMat);
+}
+
 BOOST_AUTO_TEST_CASE(test_mul_mat4_by_floatscalar_using_mul_operator, *utf::tolerance(0.00001)) {
     //Arrange
     auto left = hmm_mat4();
