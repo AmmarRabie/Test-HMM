@@ -7,14 +7,14 @@ add_library(
     ${HMMsrc}/HMM.h
 )
 
-set(TESThelpersSrc "./")
+set(TESThelpersSrc "./tests/")
 add_library(
     TestHelpers
     ${TESThelpersSrc}/test_helpers.h
 )
 
 enable_testing()
-add_definitions(-DBOOST_TEST_DYN_LINK -DHANDMADE_MATH_IMPLEMENTATION -DHANDMADE_MATH_CPP_MODE) 
+add_definitions(-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN -DHANDMADE_MATH_IMPLEMENTATION -DHANDMADE_MATH_CPP_MODE) 
 set (BOOST_ROOT $ENV{boost_test})
 find_package (Boost REQUIRED COMPONENTS unit_test_framework)
 set_target_properties(HMM PROPERTIES LINKER_LANGUAGE CXX)

@@ -32,13 +32,12 @@ take care of operator overloading also for these functions:
 - hmm_vec4 &operator*=(hmm_vec4 &Left, float Right);
 - hmm_mat4 &operator*=(hmm_mat4 &Left, float Right);
 */
-#define BOOST_TEST_MAIN
 #include <boost/test/unit_test.hpp>
 #include "HMM.h"
 #include "test_helpers.h"
-namespace utf = boost::unit_test;
-namespace tt = boost::test_tools;
 using namespace std;
+namespace tt = boost::test_tools;
+namespace utf = boost::unit_test;
 
 BOOST_AUTO_TEST_SUITE(multiplication_test_suite)
 
