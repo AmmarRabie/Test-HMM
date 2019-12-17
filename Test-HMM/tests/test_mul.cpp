@@ -167,7 +167,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
 //--------------------------------------------------------------
 
-BOOST_AUTO_TEST_SUITE(multiplication_vec3_by_int)
+BOOST_AUTO_TEST_SUITE(multiplication_vec3_by_vec3)
 BOOST_AUTO_TEST_CASE(test_HMM_MultiplyVec3_float_pos_neg, *utf::tolerance(0.00001)) {
     //Arrange
     auto left = HMM_Vec3(.5, .2, 0);
@@ -247,7 +247,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
 //--------------------------
 
-BOOST_AUTO_TEST_SUITE(multiplication_vec4_by_int)
+BOOST_AUTO_TEST_SUITE(multiplication_vec4_by_vec4)
 BOOST_AUTO_TEST_CASE(test_HMM_MultiplyVec4_float_pos_neg, *utf::tolerance(0.00001)) {
     //Arrange
     auto left = HMM_Vec4(.5, .2, 0, -12);

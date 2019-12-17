@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(division_vec2_by_float)
 
-BOOST_AUTO_TEST_CASE(test_HMM_DivideVec2f_vec_x_posfloat, *utf::tolerance(0.00001)) {
+BOOST_AUTO_TEST_CASE(test_HMM_DivideVec2f_vec2_by_posfloat, *utf::tolerance(0.00001)) {
     //Arrange
     auto left = HMM_Vec2(.5, .2);
     float right = 10.;
@@ -156,7 +156,7 @@ BOOST_AUTO_TEST_CASE(test_division_vec2_by_float_using_division_equal_operator, 
 BOOST_AUTO_TEST_SUITE_END()
 //--------------------------
 
-BOOST_AUTO_TEST_SUITE(division_vec3_by_int)
+BOOST_AUTO_TEST_SUITE(division_vec3_by_vec3)
 BOOST_AUTO_TEST_CASE(test_HMM_DivideVec3_float_pos_neg, *utf::tolerance(0.00001)) {
     //Arrange
     auto left = HMM_Vec3(.5, .2, 0);
