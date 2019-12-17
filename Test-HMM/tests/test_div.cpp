@@ -71,7 +71,8 @@ BOOST_AUTO_TEST_CASE(test_HMM_DivideVec2_int_pos_neg, *utf::tolerance(0.00001)) 
     //Act
     auto res = HMM_DivideVec2(left, right);
     //Assert
-    BOOST_TEST(vector<float>(res.Elements, res.Elements + 2) == vector<float>({left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1]}));
+    float expectedRes[2] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1]};
+    BOOST_TEST(res.Elements == expectedRes);
 }
 
 BOOST_AUTO_TEST_CASE(test_HMM_DivideVec2_float_pos_neg, *utf::tolerance(0.00001)) {
@@ -81,7 +82,8 @@ BOOST_AUTO_TEST_CASE(test_HMM_DivideVec2_float_pos_neg, *utf::tolerance(0.00001)
     //Act
     auto res = HMM_DivideVec2(left, right);
     //Assert
-    BOOST_TEST(vector<float>(res.Elements, res.Elements + 2) == vector<float>({left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1]}));
+    float expectedRes[2] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1]};
+    BOOST_TEST(res.Elements == expectedRes);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -97,7 +99,8 @@ BOOST_AUTO_TEST_CASE(test_HMM_DivideVec2f_vec_x_posfloat, *utf::tolerance(0.0000
     //Act
     auto res = HMM_DivideVec2f(left, right);
     //Assert
-    BOOST_TEST(vector<float>(res.Elements, res.Elements + 2) == vector<float>({left.Elements[0] / right, left.Elements[1] / right}));
+    float expectedRes[2] = {left.Elements[0] / right, left.Elements[1] / right};
+    BOOST_TEST(res.Elements == expectedRes);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -111,7 +114,8 @@ BOOST_AUTO_TEST_CASE(test_division_vec2_by_vec2_using_division_operator, *utf::t
     //Act
     auto res = left / right;
     //Assert
-    BOOST_TEST(vector<float>(res.Elements, res.Elements + 2) == vector<float>({left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1]}));
+    float expectedRes[2] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1]};
+    BOOST_TEST(res.Elements == expectedRes);
 }
 
 BOOST_AUTO_TEST_CASE(test_division_vec2_by_float_using_division_operator, *utf::tolerance(0.00001)) {
@@ -121,7 +125,8 @@ BOOST_AUTO_TEST_CASE(test_division_vec2_by_float_using_division_operator, *utf::
     //Act
     auto res = left / right;
     //Assert
-    BOOST_TEST(vector<float>(res.Elements, res.Elements + 2) == vector<float>({left.Elements[0] / right, left.Elements[1] / right}));
+    float expectedRes[2] = {left.Elements[0] / right, left.Elements[1] / right};
+    BOOST_TEST(res.Elements == expectedRes);
 }
 
 BOOST_AUTO_TEST_CASE(test_division_vec2_by_vec2_using_division_equal_operator, *utf::tolerance(0.00001)) {
@@ -132,7 +137,8 @@ BOOST_AUTO_TEST_CASE(test_division_vec2_by_vec2_using_division_equal_operator, *
     auto res = left;
     res /= right;
     //Assert
-    BOOST_TEST(vector<float>(res.Elements, res.Elements + 2) == vector<float>({left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1]}));
+    float expectedRes[2] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1]};
+    BOOST_TEST(res.Elements == expectedRes);
 }
 
 BOOST_AUTO_TEST_CASE(test_division_vec2_by_float_using_division_equal_operator, *utf::tolerance(0.00001)) {
@@ -144,6 +150,166 @@ BOOST_AUTO_TEST_CASE(test_division_vec2_by_float_using_division_equal_operator, 
     res /= right;
     //Assert
     float expectedRes[2] = {left.Elements[0] / right, left.Elements[1] / right};
+    BOOST_TEST(res.Elements == expectedRes);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+//--------------------------
+
+BOOST_AUTO_TEST_SUITE(division_vec3_by_int)
+BOOST_AUTO_TEST_CASE(test_HMM_DivideVec3_float_pos_neg, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec3(.5, .2, 0);
+    auto right = HMM_Vec3(-2, -10., 1.);
+    //Act
+    auto res = HMM_DivideVec3(left, right);
+    //Assert
+    float expectedRes[3] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1], left.Elements[2] / right.Elements[2]};
+    BOOST_TEST(res.Elements == expectedRes);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+//--------------------------------------------------------------
+
+BOOST_AUTO_TEST_SUITE(division_vec3_by_float)
+
+BOOST_AUTO_TEST_CASE(test_HMM_DivideVec3f_vec_x_posfloat, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec3(.5, .2, 0);
+    float right = 10.;
+    //Act
+    auto res = HMM_DivideVec3f(left, right);
+    //Assert
+    float expectedRes[3] = {left.Elements[0] / right, left.Elements[1] / right, left.Elements[2] / right};
+    BOOST_TEST(res.Elements == expectedRes);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+//--------------------------------------------------------------
+BOOST_AUTO_TEST_SUITE(mul_vec3_using_operators)
+
+BOOST_AUTO_TEST_CASE(test_mul_vec3_by_vec3_using_mul_operator, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec3(10., 1., 0);
+    auto right = HMM_Vec3(-2, -5., 9);
+    //Act
+    auto res = left / right;
+    //Assert
+    float expectedRes[3] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1], left.Elements[2] / right.Elements[2]};
+    BOOST_TEST(res.Elements == expectedRes);
+}
+
+BOOST_AUTO_TEST_CASE(test_mul_vec3_by_float_using_mul_operator, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec3(.5, .2, 0);
+    float right = 10.;
+    //Act
+    auto res = left / right;
+    //Assert
+}
+
+BOOST_AUTO_TEST_CASE(test_mul_vec3_by_vec3_using_mul_equal_operator, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec3(.5, .2, 0);
+    auto right = HMM_Vec3(-2, -5., -6);
+    //Act
+    auto res = left;
+    res /= right;
+    //Assert
+    float expectedRes[3] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1], left.Elements[2] / right.Elements[2]};
+    BOOST_TEST(res.Elements == expectedRes);
+}
+
+BOOST_AUTO_TEST_CASE(test_mul_vec3_by_float_using_mul_equal_operator, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec3(.5, .2, 0);
+    float right = 10.;
+    //Act
+    auto res = left;
+    res /= right;
+    //Assert
+    float expectedRes[3] = {left.Elements[0] / right, left.Elements[1] / right, left.Elements[2] / right};
+    BOOST_TEST(res.Elements == expectedRes);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+//-----------------------
+//--------------------------
+
+BOOST_AUTO_TEST_SUITE(division_vec4_by_int)
+BOOST_AUTO_TEST_CASE(test_HMM_DivideVec4_float_pos_neg, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec4(.5, .2, 0, -12);
+    auto right = HMM_Vec4(-2, -10., 1, -.5);
+    //Act
+    auto res = HMM_DivideVec4(left, right);
+    //Assert
+    float expectedRes[4] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1], left.Elements[2] / right.Elements[2], left.Elements[3] / right.Elements[3]};
+    BOOST_TEST(res.Elements == expectedRes);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+//--------------------------------------------------------------
+
+BOOST_AUTO_TEST_SUITE(division_vec4_by_float)
+
+BOOST_AUTO_TEST_CASE(test_HMM_DivideVec4f_vec_by_posfloat, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec4(.5, .2, 0, -12);
+    float right = 10.;
+    //Act
+    auto res = HMM_DivideVec4f(left, right);
+    //Assert
+    float expectedRes[4] = {left.Elements[0] / right, left.Elements[1] / right, left.Elements[2] / right, left.Elements[3] / right};
+    BOOST_TEST(res.Elements == expectedRes);
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+//--------------------------------------------------------------
+BOOST_AUTO_TEST_SUITE(mul_vec4_using_operators)
+
+BOOST_AUTO_TEST_CASE(test_mul_vec4_by_vec4_using_mul_operator, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec4(10., 1., 0, -3);
+    auto right = HMM_Vec4(-2, -5., 9, -.5);
+    //Act
+    auto res = left / right;
+    //Assert
+    float expectedRes[4] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1], left.Elements[2] / right.Elements[2], left.Elements[3] / right.Elements[3]};
+    BOOST_TEST(res.Elements == expectedRes);
+}
+
+BOOST_AUTO_TEST_CASE(test_mul_vec4_by_float_using_mul_operator, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec4(.5, .2, 0, 12);
+    float right = 10.;
+    //Act
+    auto res = left / right;
+    //Assert
+}
+
+BOOST_AUTO_TEST_CASE(test_mul_vec4_by_vec4_using_mul_equal_operator, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec4(.5, .2, 0, 12);
+    auto right = HMM_Vec4(-2, -5., -2, .56);
+    //Act
+    auto res = left;
+    res /= right;
+    //Assert
+    float expectedRes[4] = {left.Elements[0] / right.Elements[0], left.Elements[1] / right.Elements[1], left.Elements[2] / right.Elements[2], left.Elements[3] / right.Elements[3]};
+    BOOST_TEST(res.Elements == expectedRes);
+}
+
+BOOST_AUTO_TEST_CASE(test_mul_vec4_by_float_using_mul_equal_operator, *utf::tolerance(0.00001)) {
+    //Arrange
+    auto left = HMM_Vec4(.5, .2, 0, 12);
+    float right = 10.;
+    //Act
+    auto res = left;
+    res /= right;
+    //Assert
+    float expectedRes[4] = {left.Elements[0] / right, left.Elements[1] / right, left.Elements[2] / right, left.Elements[3] / right};
     BOOST_TEST(res.Elements == expectedRes);
 }
 

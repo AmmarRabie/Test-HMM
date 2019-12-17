@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION  2.8)
 project(test_game_engine CXX)
 
-set(HMMsrc "./")
+set(HMMsrc "./src/")
 add_library(
     HMM
     ${HMMsrc}/HMM.h
